@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Practice javascript here</title>
+	<script type="text/javascript">
+		var forFirst=["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",	 "eighty",
+			 	"ninety"
+			]
+			var forSecond=["", "one", "two", "three","four", "five", "six", "seven", "eight", "nine"
+			]
+			var forFirstOne=[
+				"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", 	"seventeeen", "eightteen", "nineteen"
+			]
+		function converter(){
+			var inputt = document.getElementById("numeric");
+			var num = inputt.value;
+			var strlen = num.length;
+			var failureReason = "";
+			var failure = false;
+			while(strlen > 0)
+			{
+				if(num.charAt(strlen) < 0 || num.charAt(strlen) > 9)
+				{
+					failure = true;
+					failureReason = failureReason + " not a digit at "+num.length-strlen;
+				}
+					strlen--;
+				
+			}
+			var num = parseFloat(num);
+
+			if(parseInt(num)-num!=0 && !failure)
+			{
+				failure =true;
+				failureReason = failureReason + "it is no an integer"
+			}
+			if(num<0 && !failure)
+			{
+				failure =true;
+				failureReason = failureReason + "it is a negative integer"
+
+			}
+			if(!failure)
+			{
+				var arr = new Array;
+				var i = 0;
+				var tempnum = num;
+				while(tempnum>0)
+				{
+					arr[i] = tempnum%10;
+					tempnum = tempnum/10;
+					tempnum = parseInt(tempnum);
+					i++;
+				}
+				var opstring = "the elements of array are: ";
+				var j=0
+				var resultString="";
+				while(j<arr.length)
+				{
+					if(j == 2)
+					{
+						if(arr[j]!=0)
+							resultString = forSecond[arr[j]]+" hundred "+twodigits(arr[1],arr[0]);
+						else
+							resultString = twodigits(arr[1],arr[0]);
+					}
+					if(j == 4)
+					{
+						if(arr[4]+arr[3]!=0)
+						resultString = twodigits(arr[4],arr[3])+" thousands "+resultString;
+					}
+					if(j == 6)
+					{
+						if(arr[6]+arr[5]!=0)
+						resultString = twodigits(arr[6],arr[5])+" lakhs "+resultString;
+					}
+					if(j == 8)
+					{
+						if(arr[8]+arr[7]!=0)
+						resultString = twodigits(arr[8],arr[7])+" crores "+resultString;
+					}
+					if(j == 10)
+					{
+						if(arr[10]+arr[9]!=0)
+						resultString = twodigits(arr[10],arr[9])+" arabs "+resultString;
+					}
+					if(j == 12)
+					{
+						if(arr[12]+arr[11]!=0)
+						resultString = twodigits(arr[12],arr[11])+" kharabs "+resultString;
+					}
+					if(j > 12)
+					{
+						resultString = "too large nmber";
+					}
+					j++;
+				}
+				j--;
+				
+					if(j == 0)
+					{
+						resultString = forSecond[arr[j]];
+					}
+					if(j == 1)
+					{
+						resultString = twodigits(arr[1],arr[0]);
+					}
+					if(j == 3 )
+					{
+						resultString = forSecond[arr[3]]+" thousands "+resultString;
+					}
+					if(j == 5 )
+					{
+						resultString = forSecond[arr[5]]+" lakhs "+resultString;
+					}
+					if(j == 7 )
+					{
+						resultString = forSecond[arr[7]]+" crores "+resultString;
+					}
+					if(j == 9 )
+					{
+						resultString = forSecond[arr[9]]+" arabs "+resultString;
+					}
+					if(j ==11 )
+					{
+						resultString = forSecond[arr[11]]+" kharabs "+resultString;
+					}
+
+				
+				document.getElementById("errormessage").innerHTML=resultString;
+			}
+			else
+			{
+				document.getElementById("errormessage").innerHTML=failureReason;
+			}
+		}
+		function twodigits(first,second)
+		{
+			// return "reached"+first+" "+second;
+			if(first != 1)
+			{
+				return forFirst[first]+" "+forSecond[second];
+			}
+			if(first == 1)
+			{
+				return forFirstOne[second];
+			}
+		}
+		function evenGetter(j,resultString,arr) {
+			switch(j-2)
+				{
+					case 0:
+						resultString= forSecond[arr[j-1]]; 
+						break;
+					case 1:
+						resultString = twodigits(arr[j-1],arr[j-2]);
+						break;
+					case 3:
+						resultString = forSecond[arr[j-1]]+" thousand "+ resultString;
+						break;				}
+				return resultString;
+		}
+	</script>
+</head>
+<body >
+	<input type="numeric" id="numeric" placeholder="Enter any +ve Integer number here">
+	<button onclick="converter()">Convert</button><br>
+	<p id="errormessage"></p>
+</body>
+
+</html>
