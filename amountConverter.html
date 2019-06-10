@@ -3,29 +3,21 @@
 <head>
 	<title>Practice javascript here</title>
 	<script type="text/javascript">
-		var forFirst=["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",	 "eighty",
-			 	"ninety"
-			]
-			var forSecond=["", "one", "two", "three","four", "five", "six", "seven", "eight", "nine"
-			]
-			var forFirstOne=[
-				"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", 	"seventeeen", "eightteen", "nineteen"
-			]
+		var forFirst=["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",	 "eighty", "ninety"]
+			var forSecond=["", "one", "two", "three","four", "five", "six", "seven", "eight", "nine"]
+			var forFirstOne=["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeeen", "eightteen", "nineteen"]
 		function converter(){
 			var inputt = document.getElementById("numeric");
 			var num = inputt.value;
 			var strlen = num.length;
 			var failureReason = "";
 			var failure = false;
-			while(strlen > 0)
+			if(isNaN(inputt))
 			{
-				if(num.charAt(strlen) < 0 || num.charAt(strlen) > 9)
-				{
-					failure = true;
-					failureReason = failureReason + " not a digit at "+num.length-strlen;
-				}
-					strlen--;
-				
+				failure = true;
+				failureReason = "not a number, the input must be an integer number";
+				document.getElementById("errormessage").innerHTML=failureReason;
+				return;
 			}
 			var num = parseFloat(num);
 
